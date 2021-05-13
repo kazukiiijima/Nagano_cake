@@ -10,12 +10,68 @@
   </head>
 
   <body>
-    <div class="col-xs-12 col-md-8">LOGO</div>
-    <div class="col-xs-12 col-md-1">About</div>
-      <div class="col-xs-12 col-md-1">商品一覧</div>
-      <div class="col-xs-12 col-md-1">新規登録</div>
-      <div class="col-xs-12 col-md-1">ログイン</div>
-      <div class="col-xs-12 col-md-1"><%= link_to"ログアウト", destroy_customer_session_path, method: :delete %></div>
-    <%= yield %>
+    <div class="well">
+      <% if customer_signed_in? %>
+        <div class="col-xs-12 col-md-8">
+          <%= link_to root_path do %>
+            <span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <% end %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"マイページ", customer_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"商品一覧", items_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"カート", cart_items_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"ログアウト", destroy_customer_session_path, method: :delete %>
+        </div>
+
+      <% elsif admin_signed_in? %>
+        <div class="col-xs-12 col-md-7">
+          <%= link_to root_path do %>
+            <span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <% end %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"商品一覧", admin_items_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"会員一覧", admin_customers_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"注文履歴一覧", admin_orders_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"ジャンル一覧", admin_genres_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"ログアウト",  destroy_admin_session_path, method: :delete %>
+        </div>
+
+      <% else %>
+        <div class="col-xs-12 col-md-8">
+          <%= link_to root_path do %>
+            <span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span>
+          <% end %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"About",  about_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"商品一覧", items_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"新規登録", new_customer_registration_path %>
+        </div>
+        <div class="col-xs-12 col-md-1">
+          <%= link_to"ログイン", new_customer_session_path %>
+        </div>
+      <% end %>
+    </div>
   </body>
+  <%= yield %>
 </html>

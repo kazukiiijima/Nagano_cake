@@ -1,4 +1,4 @@
-class Public::HomesController < ApplicationController
+class HomesController < ApplicationController
 
 	def top
 		@genres = Genre.all
@@ -8,5 +8,5 @@ class Public::HomesController < ApplicationController
 	def about
 		about_path
 	end
-
+	
 end

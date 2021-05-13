@@ -1,0 +1,35 @@
+<div class="container">
+  	<div class="col-xs-11">
+        <div class = "orders">
+			<hi>注文履歴一覧</hi>
+				<table class="table table-hover">
+					<thead>
+              			<tr>
+							<th>注文日</th>
+							<th>注文の配送先</th>
+							<th>注文商品</th>
+							<th>支払金額</th>
+							<th>注文詳細</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @orders.each do |order| %>
+							<tr>
+								<% sum = 0%>
+								<td><span><%= order.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></span></td>
+								<td><span><%= order.full_address %></span></td><br>
+								<td><span><% order.order_details.each do |order_detail| %></span></td>
+									<td><span><%= order_detail.item.name %></span></td>
+									<td><span><% order_detail.amount %></span></td>
+									<td><span><% sub_total = order_detail.price.to_i * order_detail.amount.to_i %></span></td>
+									<td><span><% sum+=sub_total %></span></td>
+								<% end %>
+								<td><span><%= sum+=800 %></span></td>
+								<td><span><%= link_to "表示する", order_path(order.id), class: "btn btn-primary" %></span></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+		</div>
+	</div>
+</div>

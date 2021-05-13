@@ -1,33 +1,32 @@
-<h1>商品新規登録</h1>
+<div class="container">
+	<div class="col-xs-11 col-xs-offset-1">
+		<h1>商品新規登録</h1>
+	</div>
 
-<%= form_with model: @item, url: admin_items_path, local: true do |f| %>
-	<div>商品画像</div>
-		<p><%= f.attachment_field :image %></p>
-
-	<div>商品名</div>
-		<p><%= f.text_field :name %></p>
-
-	<div>商品説明</div>
-		<p><%= f.text_area :introduction %></p>
-
-	<div>ジャンル</div>
-		<p>
-			<%= f.label :genre_id, 'ジャンル' %>
-			<%= f.collection_select(:genre_id, @genres, :id, :name, { include_blank: '選択してください'}, { class: 'form-control' , required: true }) %>
-		</p>
-
-
-	<div>税抜価格</div>
-		<p><%= f.text_field :price %>円</p>
-
-	<div>販売ステータス</div>
-	  <p>
-		  <%= f.radio_button :is_active, :true %>
-		  <%= f.label :is_active, "販売中", {value: :true, style: "display: inline-block;"} %>
-		  <%= f.radio_button :is_active, :false %>
-		  <%= f.label :is_active, "販売停止中", {value: :false, style: "display: inline-block;"} %>
-	  </p>
-
-	<div><%= f.submit '新規登録' %></div>
-<% end %>
+	<div class="col-xs-9 col-xs-offset-1">
+		<%= form_with model: @item, url: admin_items_path, local: true do |f| %>
+				<div>商品画像</div>
+					<div><%= f.attachment_field :image %></div>
+				<div>商品名</div>
+					<div><%= f.text_field :name %></div>
+				<div>商品説明</div>
+					<div><%= f.text_area :introduction %></div>
+				<div>ジャンル</div>
+					<div>
+						<%= f.label :genre_id, 'ジャンル' %>
+						<%= f.collection_select(:genre_id, @genres, :id, :name, { include_blank: '選択してください'}, { class: 'form-control' , required: true }) %>
+					</div>
+				<div>税抜価格</div>
+					<div><%= f.text_field :price %>円</div>
+				<div>販売ステータス</div>
+				  	<div>
+		 			    <%= f.radio_button :is_active, :販売中 %>
+	 			   	    <%= f.label :is_active, '販売中', {value: :true, style: "display: inline-block;"} %>
+					    <%= f.radio_button :is_active, :販売停止中 %>
+					    <%= f.label :is_active, '販売停止中', {value: :false, style: "display: inline-block;"}%>
+				  	</div>
+				<div><%= f.submit '新規登録' %></div>
+		<% end %>
+	</div>
+</div>
 

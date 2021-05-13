@@ -1,24 +1,35 @@
-<h1>ジャンル検索</h1>
-	<div>
-		<% @genres.each do |genre| %>
-		   <div><%= link_to genre.name, items_path(genre: genre.id) %></div>
-		<% end %>
+<div class="container">
+	<div class="col-xs-3">
+		<div class = "genres">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<h2>ジャンル検索</h2>
+					</tr>
+				</thead>
+				<tbody>
+					<% @genres.each do |genre| %>
+						<tr>
+		   					<td><span><%= link_to genre.name, items_path(genre: genre.id) %></span></td>
+		   				</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
-<h1>商品詳細</h1>
-<p><%= attachment_image_tag @item, :image, :fill, 60, 60 %></p>
+	<div class="col-xs-5">
+		<p><%= attachment_image_tag @item, :image, :fill, 240, 240%></p>
+	</div>
 
-<div>商品名</div>
-<p><%= @item.name %></p>
-
-<div>商品説明</div>
-<p><%= @item.introduction %></p>
-
-<div>税込価格（税抜価格）</div>
-<p><%= @item.price %></p>
-
-<%=form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-<%=f.hidden_field :item_id, :value => @item.id %>
-<%=f.select :amount, ["１","2","3","4","5"], :prompt => "個数選択" %>
-<%=f.submit "カートに入れる" %>
-<% end %>
+	<div class="col-xs-4">
+		<p><%= @item.name %></p>
+		<p><%= @item.introduction %></p>
+		<p>¥<%= @item.price %></p>
+			<%=form_with model: @cart_item, url: cart_items_path, local: true, method: :post do |f| %>
+				<%=f.hidden_field :item_id, :value => @item.id %>
+				<%=f.select :amount, ["１","2","3","4","5"], :prompt => "個数選択" %>
+				<%=f.submit "カートに入れる", class: "btn btn-success" %>
+			<% end %>
+	</div>
+</div>

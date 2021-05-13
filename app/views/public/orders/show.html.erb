@@ -1,0 +1,59 @@
+<div class="container">
+	<div class="col-xs-11 col-xs-offset-1">
+		<h1>注文履歴詳細</h1>
+	</div>
+
+	<div class="col-xs-11 col-xs-offset-1">
+		<h2>注文情報</h2>
+	</div>
+
+	<div class="col-xs-11 col-xs-offset-1">
+		<p>注文日</p>
+			<div><%= @order.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></div>
+		<p>配送先</p>
+			<div><%= @order.postal_code %></div>
+			<div><%= @order.address %></div>
+			<div><%= @order.name %></div>
+		<p>支払方法</p>
+			<div><%= @order.payment_method %></div>
+	</div>
+
+	<div class="col-xs-11 col-xs-offset-1">
+		<div class = "orders">
+			<h2>注文内容</h2>
+				<table class="table table-hover">
+					<thead>
+              			<tr>
+							<th>商品</th>
+							<th>単価</th>
+							<th>個数</th>
+							<th>小計</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% sum = 0%>
+						<% @order.order_details.each do |order_detail| %>
+							<tr>
+								<td><span><%= order_detail.item.name %></span></td>
+								<td><span><%= order_detail.price %></span></td>
+								<td><span><%= order_detail.amount %></span></td>
+								<td><span><%= sub_total = order_detail.price.to_i * order_detail.amount.to_i %></span></td>
+								<td><span><% sum+=sub_total %></span></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+		</div>
+	</div>
+	<div class="col-xs-11 col-xs-offset-1">
+		<h2>請求情報</h2>
+	</div>
+	<div class="col-xs-11 col-xs-offset-1">
+		<p>商品合計</p>
+			<%= sum %>
+		<p>配送料</p>
+			800
+		<p>ご請求額</p>
+			<%= sum+=800 %>
+	</div>
+</div>

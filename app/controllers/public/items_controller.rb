@@ -10,9 +10,9 @@ class Public::ItemsController < ApplicationController
 		end
 
 		if params[:genre].blank?
-			@items = Item.all
+			@items = Item.all.page(params[:page]).per(10)
 		else
-			@items = Item.where(genre_id: params[:genre])
+			@items = Item.where(genre_id: params[:genre]).page(params[:page]).per(10)
 		end
 
 		if params[:genre].blank?
@@ -25,8 +25,7 @@ class Public::ItemsController < ApplicationController
 	def show
 		@genres = Genre.all
 		@item = Item.find(params[:id])
-		@cart_item　= CartItem.new
+		@cart_item = CartItem.new
 	end
-
 
 end
