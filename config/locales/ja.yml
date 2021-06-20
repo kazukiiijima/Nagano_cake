@@ -1,0 +1,6 @@
+ja:
+  enums:
+    user:
+      gender:
+        true: 販売中
+        false: 販売停止中

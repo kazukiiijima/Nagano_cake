@@ -1,25 +1,31 @@
-<h1>商品一覧</h1>
-<div><%= link_to "+", new_admin_item_path(@item) %></div>
-<table>
-	<thead>
-		<tr>
-			<th>商品ID</th>
-			<th>商品名</th>
-			<th>税抜価格</th>
-			<th>ジャンル</th>
-			<th>ステータス</th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<% @items.each do |item| %>
-			<tr>
-                <td><span><%= item.id %></span></td>
-                <td><span><%= link_to item.name, admin_item_path(item.id) %></span></td>
-                <td><span><%= item.price %></span></td>
-                <td><span><%= item.genre_id %></span></td>
-                <td><span><%= item.is_active %></span></td>
-            </tr>
-        <% end %>
-	</tbody>
-</table>
+<div class="container">
+  	<div class="col-xs-11">
+        <div class = "orders">
+			<h1>商品一覧</h1>
+			<div><%= link_to "+", new_admin_item_path(@item) %></div>
+			<table class="table table-hover">
+					<thead>
+              			<tr>
+							<th>商品ID</th>
+							<th>商品名</th>
+							<th>税抜価格</th>
+							<th>ジャンル</th>
+							<th>ステータス</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @items.each do |item| %>
+							<tr>
+				                <td><span><%= item.id %></span></td>
+				                <td><span><%= link_to item.name, admin_item_path(item.id) %></span></td>
+				                <td><span><%= item.price %></span></td>
+				                <td><span><%= item.genre.name %></span></td>
+				                <td><span><%= item.is_active %></span></td>
+				            </tr>
+				        <% end %>
+					</tbody>
+			</table>
+			<%= paginate @items %>
+		</div>
+	</div>
+</div>

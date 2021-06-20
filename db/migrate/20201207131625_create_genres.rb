@@ -1,7 +1,6 @@
 class CreateGenres < ActiveRecord::Migration[5.2]
   def change
-    create_table :genres, :id => false do |t|
-    	t.integer :id, :primary_key => true
+    create_table :genres do |t|
     	t.string :name
     	t.boolean :is_active
     	t.timestamps

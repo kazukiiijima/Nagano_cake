@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="col-xs-11 col-xs-offset-1">
+		<h1>注文情報詳細</h1>
+	</div>
+
+	<div class="col-xs-7">
+		<div class = "orders">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>商品名</th>
+						<th>単価（税込）</th>
+						<th>数量</th>
+						<th>小計</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+					<% sum = 0%>
+						<% @cart_items.each do |cart_item| %>
+							<tr>
+								<td><span>
+								<%= attachment_image_tag cart_item.item, :image, :fill, 60, 60 %>
+								</span></td>
+								<td><span><%= cart_item.item.name %></span></td>
+								<td><span><%= cart_item.item.price %></span></td>
+								<td><span><%= cart_item.amount %></span></td>
+								<td><span><%= sub_total = cart_item.item.price.to_i * cart_item.amount.to_i %><td><span>
+								<td><span><% sum+=sub_total %><td><span>
+							</tr>
+						<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-xs-5">
+		<tr>送料      800</tr><br>
+		<tr>商品合計  <%= sum %></tr><br>
+		<tr>請求金額  <%= sum+=800 %></tr><br>
+	</div>
+
+	<div class="col-xs-11 col-xs-offset-1">
+		<tr>支払い方法</tr><br>
+			<td><%= @order.payment_method %></td><br>
+
+		<tr>お届け先</tr><br>
+			<td><%= @order.full_address %></td><br>
+	</div>
+
+	<div class="col-xs-9 col-xs-offset-3">
+		<tr><%= f.submit "注文を確認する", class: "btn btn-success" %></tr>
+		<% end %>
+	</div>
+</div>

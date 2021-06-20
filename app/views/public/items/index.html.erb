@@ -1,0 +1,44 @@
+<div class="container">
+	<div class="col-xs-3">
+		<div class = "genres">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<h2>ジャンル検索</h2>
+					</tr>
+				</thead>
+				<tbody>
+					<% @genres.each do |genre| %>
+		    			<tr>
+		    				<td><span><%= link_to genre.name, items_path(genre: genre.id) %></span></td>
+		    			</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-xs-9">
+		<div class = "items">
+			<table class="table table-hover">
+				<thead>
+					<h1><%= @genre_name %>一覧（全<%= @items_count %>件）</h1>
+				</thead>
+				<tbody>
+					<% @items.each do |item| %>
+						<tr>
+							<td><span>
+								<%= attachment_image_tag item, :image, :fill, 60, 60 %>
+							</span></td>
+							<td><span><%= link_to item.name, item_path(item.id) %></span></td>
+							<td><span>¥<%= item.price %></span></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<%= paginate @items %>
+		</div>
+	</div>
+</div>
+
+
